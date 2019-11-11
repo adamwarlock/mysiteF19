@@ -1,0 +1,14 @@
+{% extends 'myapp/base.html' %}
+
+{% block body_block %}
+
+
+     <h1>Book Details</h1>
+    <ul>
+        <li><b>Title: </b>{{ book.title }}</li>
+        <li><b>Price: </b>{{ book.price }} CAD</li>
+        <li><b>Publisher: </b>{{ book.publisher }}</li>
+    </ul>
+
+
+{% endblock %}
