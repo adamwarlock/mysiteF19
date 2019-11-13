@@ -1,0 +1,28 @@
+{% extends 'myapp/base.html' %}
+
+{% block body_block %}
+
+<div>
+    <strong>Order By: </strong>{{ order.member.first_name}}<br>
+    {% if order.order_type == 1 %}
+        <strong>Order Type: </strong>Borrow
+        {% else %}
+        <strong>Order Type: </strong>Purchase
+    {% endif %}
+
+</div>
+
+
+    <ol>
+{% for book  in books %}
+
+
+                        <li> <strong> Book Title: </strong>{{book.title}} </li>
+                        <li> <strong>Price: </strong>{{book.price}} </li>
+                    <br>
+
+
+            {% endfor %}
+</ol>
+
+{% endblock %}

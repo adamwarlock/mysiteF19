@@ -1,0 +1,12 @@
+{% extends 'myapp/base.html' %}
+{% block body_block %}
+    <form action="{% url 'myapp:review' %}" method="post">
+        {% csrf_token %}
+        {% if ratingErr %}
+            <div><h2 style="color: red">Enter a valid rating</h2></div>
+        {% endif %}
+        {{ form.as_p }}
+        <input type="submit" name="submit1" value="Submit Review" />
+    </form>
+
+{% endblock %}
