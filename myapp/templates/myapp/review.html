@@ -5,7 +5,9 @@
         {% if ratingErr %}
             <div><h2 style="color: red">Enter a valid rating</h2></div>
         {% endif %}
-        {{ form.as_p }}
+    <table>
+        {{ form.as_table }}
+        </table>
         <input type="submit" name="submit1" value="Submit Review" />
     </form>
 

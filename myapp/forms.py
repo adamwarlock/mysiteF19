@@ -33,4 +33,3 @@ class ReviewForm(forms.ModelForm):
                    'comments': forms.Textarea}
         labels = {'reviewer': u'Please enter a valid email',
                   'rating': u'Rating: An integer between 1 (worst) and 5 (best)'}
-

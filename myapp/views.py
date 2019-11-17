@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Publisher, Book, Member, Order
 from django.http import HttpResponse
 from .forms import SearchForm, OrderForm, ReviewForm
@@ -97,7 +97,7 @@ def review(request):
                 book.save()
                 review.save()
 
-                return index(request)
+                return redirect('myapp:index')
             else:
                 return render(request, 'myapp/review.html', {'form': form, 'ratingErr': True})
             # books = form.cleaned_data['books']
