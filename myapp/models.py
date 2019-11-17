@@ -35,6 +35,7 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+
 class Member(User):
     STATUS_CHOICES = [
         (1, 'Regular member'),
@@ -44,14 +45,14 @@ class Member(User):
 
     status = models.IntegerField(choices=STATUS_CHOICES, default=1)
     address = models.CharField(max_length=300, blank=True)
-    city = models.CharField(max_length=20,default='Windsor')
+    city = models.CharField(max_length=20, default='Windsor')
     province = models.CharField(max_length=2, default='ON')
     last_renewal = models.DateField(default=timezone.now)
     auto_renew = models.BooleanField(default=True)
     borrowed_books = models.ManyToManyField(Book, blank=True)
 
     def __str__(self):
-        return self.first_name+' '+self.last_name
+        return self.first_name + ' ' + self.last_name
 
 
 class Order(models.Model):
@@ -66,7 +67,7 @@ class Order(models.Model):
     order_date = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return str(self.order_date)+" : "+self.member.first_name+' '+self.member.last_name
+        return str(self.order_date) + " : " + self.member.first_name + ' ' + self.member.last_name
 
     def total_items(self):
         return len(self.books.all())
@@ -80,5 +81,4 @@ class Review(models.Model):
     date = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return str(self.date)+": "+str(self.book.title)
-
+        return str(self.date) + ": " + str(self.book.title)
