@@ -7,3 +7,5 @@ admin.site.register(Book)
 admin.site.register(Member)
 admin.site.register(Order)
 admin.site.register(Review)
+
+#class PublisherAdmin(admin.ModelAdmin):

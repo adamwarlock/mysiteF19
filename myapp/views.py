@@ -1,7 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+
 from .models import Publisher, Book, Member, Order
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .forms import SearchForm, OrderForm, ReviewForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 # Create your views here.
@@ -69,14 +73,15 @@ def place_order(request):
             member = order.member
             type = order.order_type
             order.save()
+            form.save_m2m()
+            price = 0
 
-            if type == 1:
-                for b in books:
+            for b in order.books.all():
+                price += b.price
+                if type == 1:
                     member.borrowed_books.add(b)
 
-            form.save_m2m()
-
-            return render(request, 'myapp/order_response.html', {'books': books, 'order': order})
+            return render(request, 'myapp/order_response.html', {'books': books, 'order': order, 'price': price})
         else:
             return render(request, 'myapp/placeorder.html', {'form': form})
 
@@ -93,25 +98,13 @@ def review(request):
             if 1 <= rating <= 5:
                 review = form.save(commit=False)
                 book = review.book
-                book.num_reviews+=1
+                book.num_reviews += 1
                 book.save()
                 review.save()
 
                 return redirect('myapp:index')
             else:
                 return render(request, 'myapp/review.html', {'form': form, 'ratingErr': True})
-            # books = form.cleaned_data['books']
-            # order = form.save(commit=False)
-            # member = order.member
-            # type = order.order_type
-            # order.save()
-            # if type == 1:
-            #     for b in order.books.all():
-            #         member.borrowed_books.add(b)
-            #     #member.save()
-            #
-            # form.save_m2m()
-
 
         else:
             return render(request, 'myapp/review.html', {'form': form})
@@ -119,3 +112,32 @@ def review(request):
     else:
         form = ReviewForm()
         return render(request, 'myapp/review.html', {'form': form})
+
+
+# Import necessary classes and models
+
+
+# Create your views here.
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+        print(user)
+        if user:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(reverse('myapp:index'))
+            else:
+                return HttpResponse('Your account is disabled.')
+        else:
+            return HttpResponse('Invalid login details.')
+    else:
+        return render(request, 'myapp/login.html')
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse(('myapp:index')))

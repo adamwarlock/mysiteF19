@@ -24,5 +24,7 @@
 
             {% endfor %}
 </ol>
-
+{% if price %}
+    <h3 align="center">Total price: {{ price }}</h3>
+    {% endif %}
 {% endblock %}
