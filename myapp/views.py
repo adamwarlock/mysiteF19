@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
-from .models import Publisher, Book, Member, Order
+from .models import Publisher, Book, Member, Order, Review
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import SearchForm, OrderForm, ReviewForm
 from django.contrib.auth import authenticate, login, logout
@@ -124,7 +124,7 @@ def user_login(request):
         password = request.POST['password']
 
         user = authenticate(username=username, password=password)
-        print(user)
+        #print(user)
         if user:
             if user.is_active:
                 login(request, user)
@@ -141,3 +141,35 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse(('myapp:index')))
+
+
+@login_required
+def chk_reviews_index(request):
+    booklist = Book.objects.all().order_by('id')[:10]
+    return render(request, 'myapp/chk_reviews_index.html', {'booklist': booklist})
+
+
+@login_required
+def chk_reviews(request, book_id):
+    try:
+        if Member.objects.get(id=request.user.id):
+            count = 0
+            rating = 0
+            b = {}
+            for r in Review.objects.filter(book__id=book_id):
+                count += 1
+                rating += r.rating
+            if rating != 0:
+                b['avgRating'] = round(rating / count, 2)
+            else:
+                b['avgRating'] = 'Not rated'
+
+            b['title'] = Book.objects.get(id=book_id).title
+            b['price'] = Book.objects.get(id=book_id).price
+
+            return render(request, 'myapp/chk_reviews.html',
+                          {'member': request.user.first_name, 'book': b})
+    except Member.DoesNotExist:
+        return render(request, 'myapp/chk_reviews.html')
+    except Book.DoesNotExist:
+        return render(request, 'myapp/chk_reviews.html', {'member': request.user.first_name})

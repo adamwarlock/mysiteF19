@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
+{% extends 'myapp/base.html' %}
+
+{% block body_block %}
+
 <form action="{% url 'myapp:login' %}" method="post">
     {% csrf_token %}
     <label for="uname"><b>Username</b></label>
@@ -13,9 +10,8 @@
     <br>
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" required>
+    <br>
+    <br>
+    <button type="submit" >Login</button>
 
-    <button type="submit">Login</button>
-
-</form>
-</body>
-</html>
+{% endblock %}

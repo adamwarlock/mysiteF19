@@ -7,7 +7,7 @@
         <h2>List of Books</h2>
         <ol>
             {% for book  in booklist %}
-                <li> <a href="{% url 'myapp:book_detail' book.id %}">{{book.title}} </a></li>
+                <li> <a href="{% url 'myapp:book_detail' book.id %}">{{book.title}} </a> </li>
             {% endfor %}
         </ol>
 
