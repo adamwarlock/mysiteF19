@@ -10,6 +10,7 @@
                 <li> <a href="{% url 'myapp:book_detail' book.id %}">{{book.title}} </a> </li>
             {% endfor %}
         </ol>
+        <h3 align="center">{{ last_login }}</h3>
 
     {% else %}
         <strong>There are no available books!</strong>

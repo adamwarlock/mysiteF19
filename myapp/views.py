@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
+from django.template.loader import render_to_string
 from django.urls import reverse
 
 from .models import Publisher, Book, Member, Order, Review
@@ -6,12 +7,17 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .forms import SearchForm, OrderForm, ReviewForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
+import random, datetime, json, pytz
 
 
 # Create your views here.
 def index(request):
+    if 'last_login' in request.session:
+        last_login = request.session['last_login']
+    else:
+        last_login = 'Your last login was more that one hour ago'
     booklist = Book.objects.all().order_by('id')[:10]
-    return render(request, 'myapp/index.html', {'booklist': booklist})
+    return render(request, 'myapp/index.html', {'booklist': booklist, 'last_login': last_login})
 
 
 # def index(request):
@@ -23,7 +29,18 @@ def index(request):
 #     return render(request, 'myapp/about0.html')
 
 def about(request):
-    return render(request, 'myapp/about.html')
+    response = HttpResponse()
+    if request.COOKIES.get('lucky_num'):
+        mynum = request.COOKIES.get('lucky_num')
+
+    else:
+        mynum = random.randint(1, 100)
+
+    response.set_cookie('lucky_num', mynum, 300)
+    temp = render_to_string('myapp/about.html', {'mynum': mynum})
+
+    response.write(temp)
+    return response
 
 
 def detail(request, book_id):
@@ -124,7 +141,11 @@ def user_login(request):
         password = request.POST['password']
 
         user = authenticate(username=username, password=password)
-        #print(user)
+        dt = datetime.datetime.now(pytz.timezone('America/Toronto'))
+
+
+        request.session['last_login'] = 'Last Login: '+ json.dumps(dt, default=str)
+        request.session.set_expiry(360)
         if user:
             if user.is_active:
                 login(request, user)

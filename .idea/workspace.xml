@@ -2,26 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6baab25b-10bc-49ea-98e8-6e441abd09f7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/myapp/static/myapp/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myapp/static/myapp/favicon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myapp/templates/myapp/chk_reviews.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myapp/templates/myapp/chk_reviews_index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/bin/python3.6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mysiteF19.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mysiteF19.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myapp/templates/myapp/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/templates/myapp/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myapp/templates/myapp/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/templates/myapp/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myapp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysiteF19/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysiteF19/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/myapp/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/myapp/about.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/myapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/myapp/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/bin/activate" beforeDir="false" afterPath="$PROJECT_DIR$/venv/bin/activate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/bin/activate.fish" beforeDir="false" afterPath="$PROJECT_DIR$/venv/bin/activate.fish" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/bin/python" beforeDir="false" afterPath="$PROJECT_DIR$/venv/bin/python" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/bin/python3" beforeDir="false" afterPath="$PROJECT_DIR$/venv/bin/python3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/bin/python3.7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/pyvenv.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -164,7 +150,7 @@
       <workItem from="1574028312821" duration="5216000" />
       <workItem from="1574232695314" duration="21000" />
       <workItem from="1574232735569" duration="5711000" />
-      <workItem from="1574288676838" duration="1795000" />
+      <workItem from="1574288676838" duration="11090000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
