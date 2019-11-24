@@ -35,8 +35,7 @@ def about(request):
 
     else:
         mynum = random.randint(1, 100)
-
-    response.set_cookie('lucky_num', mynum, 300)
+        response.set_cookie('lucky_num', mynum, 300)
     temp = render_to_string('myapp/about.html', {'mynum': mynum})
 
     response.write(temp)
@@ -139,15 +138,15 @@ def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-
         user = authenticate(username=username, password=password)
-        dt = datetime.datetime.now(pytz.timezone('America/Toronto'))
 
-
-        request.session['last_login'] = 'Last Login: '+ json.dumps(dt, default=str)
-        request.session.set_expiry(3600)
         if user:
             if user.is_active:
+
+                dt = datetime.datetime.now(pytz.timezone('America/Toronto'))
+
+                request.session['last_login'] = 'Last Login: ' + json.dumps(dt, default=str)
+                request.session.set_expiry(3600)
                 login(request, user)
                 return HttpResponseRedirect(reverse('myapp:index'))
             else:

@@ -7,9 +7,9 @@
         <h2>List of Books</h2>
         <table>
 
-        <ul>
+        <tbody >
             {% for book  in booklist %}
-                    <tr>
+                    <tr align="left">
                         <td>
                             <li>
                                 <a href="{% url 'myapp:book_detail' book.id %}">{{book.title}} </a>
@@ -20,8 +20,8 @@
                         </td>
                     </tr>
             {% endfor %}
-        </ul>
 
+        </tbody>
         </table>
     {% else %}
         <strong>There are no available books!</strong>
