@@ -145,7 +145,7 @@ def user_login(request):
 
 
         request.session['last_login'] = 'Last Login: '+ json.dumps(dt, default=str)
-        request.session.set_expiry(360)
+        request.session.set_expiry(3600)
         if user:
             if user.is_active:
                 login(request, user)
