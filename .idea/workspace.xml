@@ -4,7 +4,10 @@
     <list default="true" id="6baab25b-10bc-49ea-98e8-6e441abd09f7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myapp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myapp/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myapp/templates/myapp/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/templates/myapp/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myapp/templates/myapp/placeorder.html" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/templates/myapp/placeorder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +104,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8001" />
+      <option name="port" value="8000" />
       <option name="host" value="" />
       <option name="additionalOptions" value="" />
       <option name="browserUrl" value="" />
@@ -159,6 +162,8 @@
       <workItem from="1574631965656" duration="1160000" />
       <workItem from="1574637244226" duration="419000" />
       <workItem from="1574637757365" duration="201000" />
+      <workItem from="1574703279372" duration="940000" />
+      <workItem from="1574974880986" duration="6183000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />

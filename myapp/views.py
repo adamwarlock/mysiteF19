@@ -29,16 +29,15 @@ def index(request):
 #     return render(request, 'myapp/about0.html')
 
 def about(request):
-    response = HttpResponse()
     if request.COOKIES.get('lucky_num'):
         mynum = request.COOKIES.get('lucky_num')
+        response = render(request, 'myapp/about.html', {'mynum': mynum})
 
     else:
         mynum = random.randint(1, 100)
+        response = render(request, 'myapp/about.html', {'mynum': mynum})
         response.set_cookie('lucky_num', mynum, 300)
-    temp = render_to_string('myapp/about.html', {'mynum': mynum})
 
-    response.write(temp)
     return response
 
 
@@ -80,6 +79,7 @@ def findbooks(request):
         return render(request, 'myapp/findbooks.html', {'form': form})
 
 
+@login_required(redirect_field_name='next')
 def place_order(request):
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -87,23 +87,30 @@ def place_order(request):
             books = form.cleaned_data['books']
             order = form.save(commit=False)
             member = order.member
+
             type = order.order_type
             order.save()
             form.save_m2m()
             price = 0
 
-            for b in order.books.all():
-                price += b.price
-                if type == 1:
+            if type == 1:
+                for b in order.books.all():
                     member.borrowed_books.add(b)
+            elif type == 0:
+                for b in order.books.all():
+                    price += b.price
 
             return render(request, 'myapp/order_response.html', {'books': books, 'order': order, 'price': price})
         else:
             return render(request, 'myapp/placeorder.html', {'form': form})
 
     else:
-        form = OrderForm()
-        return render(request, 'myapp/placeorder.html', {'form': form})
+        try:
+            initial = {'member': Member.objects.get(id=request.user.id)}
+            form = OrderForm(initial=initial)
+            return render(request, 'myapp/placeorder.html', {'form': form})
+        except Member.DoesNotExist:
+            return render(request, 'myapp/placeorder.html', {'memberErr': 'You are not a registered memeber!'})
 
 
 def review(request):
@@ -138,23 +145,33 @@ def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+
         user = authenticate(username=username, password=password)
 
         if user:
             if user.is_active:
-
+                next = request.POST['next']
                 dt = datetime.datetime.now(pytz.timezone('America/Toronto'))
 
                 request.session['last_login'] = 'Last Login: ' + json.dumps(dt, default=str)
                 request.session.set_expiry(3600)
                 login(request, user)
-                return HttpResponseRedirect(reverse('myapp:index'))
+
+                if next == "":
+                    return HttpResponseRedirect(reverse('myapp:index'))
+                else:
+                    return HttpResponseRedirect(next)
+
             else:
                 return HttpResponse('Your account is disabled.')
         else:
             return HttpResponse('Invalid login details.')
     else:
-        return render(request, 'myapp/login.html')
+        next = ""
+        if request.GET:
+            next = request.GET['next']
+
+        return render(request, 'myapp/login.html', {'next': next})
 
 
 @login_required

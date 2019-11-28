@@ -1,0 +1,10 @@
+[default]
+name=Default
+runtime=host
+config-opts=
+run-opts=
+prefix=/home/adam/.cache/gnome-builder/install/myapp/host
+app-id=
+postbuild=
+prebuild=
+default=true

@@ -2,8 +2,10 @@
 
 {% block body_block %}
 
-<form action="{% url 'myapp:login' %}" method="post">
+    <form action="{% url 'myapp:login' %}" method="post">
+
     {% csrf_token %}
+    <input type="hidden" name="next" value={{ next }}>
     <label for="uname"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="username" required>
     <br>
