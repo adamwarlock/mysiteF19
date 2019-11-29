@@ -13,7 +13,11 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'member', 'order_type', 'order_date', 'total_items')
 
 
-admin.site.register(Publisher)
+class PublisherAdmin(admin.ModelAdmin):
+    list_display = ('name', 'website', 'city', 'country')
+
+
+admin.site.register(Publisher, PublisherAdmin)
 admin.site.register(Book, BookAdmin)
 admin.site.register(Member)
 admin.site.register(Order, OrderAdmin)

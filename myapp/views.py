@@ -86,7 +86,8 @@ def place_order(request):
         if form.is_valid():
             books = form.cleaned_data['books']
             order = form.save(commit=False)
-            member = order.member
+            member = Member.objects.get(id=request.user.id)
+            order.member = member
 
             type = order.order_type
             order.save()
@@ -103,14 +104,16 @@ def place_order(request):
             return render(request, 'myapp/order_response.html', {'books': books, 'order': order, 'price': price})
         else:
             return render(request, 'myapp/placeorder.html', {'form': form})
-
     else:
-        try:
-            initial = {'member': Member.objects.get(id=request.user.id)}
-            form = OrderForm(initial=initial)
-            return render(request, 'myapp/placeorder.html', {'form': form})
-        except Member.DoesNotExist:
-            return render(request, 'myapp/placeorder.html', {'memberErr': 'You are not a registered memeber!'})
+        form = OrderForm()
+        return render(request, 'myapp/placeorder.html', {'form': form})
+    # else:
+    #     try:
+    #         initial = {'member': Member.objects.get(id=request.user.id)}
+    #         form = OrderForm(initial=initial)
+    #         return render(request, 'myapp/placeorder.html', {'form': form})
+    #     except Member.DoesNotExist:
+    #         return render(request, 'myapp/placeorder.html', {'memberErr': 'You are not a registered memeber!'})
 
 
 def review(request):
